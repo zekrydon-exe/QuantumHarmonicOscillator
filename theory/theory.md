@@ -8,729 +8,642 @@ The quantum harmonic oscillator is a fundamental model in quantum mechanics. It 
 
 The model is relevant to molecular vibrations, quantised vibrational energy levels, and the study of more complicated quantum systems.
 
-In this project, we solve the time-independent Schrödinger equation numerically and compare the calculated energies and wavefunctions with their analytical counterparts.
+This project solves the time-independent Schrödinger equation numerically and compares the calculated energies and wavefunctions with their analytical counterparts.
 
 ### 1.2 Potential Energy
 
 The potential energy of a one-dimensional harmonic oscillator is
 
-\[
-V(x) = \frac{1}{2}kx^2
-\]
+$$
+V(x)=\frac{1}{2}kx^2,
+$$
 
-where:
-
-- \(x\) is the displacement from equilibrium.
-- \(k\) is the force constant.
-- \(V(x)\) is the potential energy.
-
-The potential is quadratic, producing a parabolic potential-energy curve. The potential has its minimum at \(x=0\), and the restoring force increases linearly with displacement.
+where $x$ is the displacement from equilibrium and $k$ is the force constant. The potential is parabolic, with a minimum at $x=0$. The corresponding restoring force is linear in displacement.
 
 ### 1.3 Time-Independent Schrödinger Equation
 
-For a particle of mass \(m\) moving in one dimension, the time-independent Schrödinger equation is
+For a particle of mass $m$ moving in one dimension, the time-independent Schrödinger equation is
 
-\[
-\hat{H}\psi(x) = E\psi(x)
-\]
+$$
+\hat{H}\psi(x)=E\psi(x),
+$$
 
-where \(\hat{H}\) is the Hamiltonian operator, \(\psi(x)\) is the stationary-state wavefunction, and \(E\) is the corresponding energy eigenvalue.
+where $\hat{H}$ is the Hamiltonian operator, $\psi(x)$ is the stationary-state wavefunction, and $E$ is the energy eigenvalue.
 
 The Hamiltonian consists of kinetic and potential energy operators:
 
-\[
+$$
 \hat{H}
 =
 -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}
-+
-\frac{1}{2}kx^2
-\]
++\frac{1}{2}kx^2.
+$$
 
-Therefore, the Schrödinger equation becomes
+The Schrödinger equation is therefore
 
-\[
+$$
 -\frac{\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2}
-+
-\frac{1}{2}kx^2\psi(x)
-=
-E\psi(x)
-\]
++\frac{1}{2}kx^2\psi(x)
+=E\psi(x).
+$$
 
-The first term represents the kinetic energy, while the second represents the potential energy.
+The first term represents kinetic energy and the second represents potential energy.
 
 ### 1.4 Dimensionless Formulation
 
-To simplify the equation, we introduce the dimensionless coordinate
+Define the angular frequency
 
-\[
-q = \sqrt{\frac{m\omega}{\hbar}}x
-\]
+$$
+\omega=\sqrt{\frac{k}{m}},
+$$
 
-where the angular frequency of the oscillator is
+and the dimensionless coordinate
 
-\[
-\omega = \sqrt{\frac{k}{m}}
-\]
+$$
+q=\sqrt{\frac{m\omega}{\hbar}}\,x.
+$$
 
-We also define the dimensionless energy
+The dimensionless energy is
 
-\[
-\varepsilon = \frac{E}{\hbar\omega}
-\]
+$$
+\varepsilon=\frac{E}{\hbar\omega}.
+$$
 
 Using these definitions, the Schrödinger equation becomes
 
-\[
+$$
 -\frac{1}{2}\frac{d^2\psi(q)}{dq^2}
-+
-\frac{1}{2}q^2\psi(q)
-=
-\varepsilon\psi(q)
-\]
++\frac{1}{2}q^2\psi(q)
+=\varepsilon\psi(q).
+$$
 
-Equivalently, the dimensionless Hamiltonian is
+The dimensionless Hamiltonian is
 
-\[
+$$
 \hat{H}
 =
 -\frac{1}{2}\frac{d^2}{dq^2}
-+
-\frac{1}{2}q^2
-\]
++\frac{1}{2}q^2,
+$$
 
 and the eigenvalue equation is
 
-\[
-\hat{H}\psi_n(q)=\varepsilon_n\psi_n(q)
-\]
+$$
+\hat{H}\psi_n(q)=\varepsilon_n\psi_n(q).
+$$
 
-The dimensionless formulation removes explicit dependence on the particle mass, force constant, and reduced Planck constant. It also allows the numerical results to be compared directly with the exact dimensionless energy levels.
+This formulation removes explicit dependence on the particle mass, force constant, and reduced Planck constant from the dimensionless eigenvalue problem.
 
 ### 1.5 Analytical Energy Eigenvalues
 
-The one-dimensional quantum harmonic oscillator has the exact dimensionless energy eigenvalues
+The exact dimensionless energy eigenvalues are
 
-\[
-\boxed{\varepsilon_n=n+\frac{1}{2}}
-\]
-
-where
-
-\[
-n=0,1,2,\ldots
-\]
+$$
+\varepsilon_n=n+\frac{1}{2},
+\qquad n=0,1,2,\ldots
+$$
 
 The corresponding physical energies are
 
-\[
-E_n=\hbar\omega\left(n+\frac{1}{2}\right)
-\]
+$$
+E_n=\hbar\omega\left(n+\frac{1}{2}\right).
+$$
 
 The ground-state energy is non-zero:
 
-\[
-\varepsilon_0=\frac{1}{2}
-\]
+$$
+\varepsilon_0=\frac{1}{2}.
+$$
 
-This is the zero-point energy. It demonstrates that the oscillator cannot have zero energy in its ground state.
+This is the zero-point energy. Adjacent levels are equally spaced:
 
-Adjacent energy levels are equally spaced:
+$$
+\varepsilon_{n+1}-\varepsilon_n=1,
+$$
 
-\[
-\varepsilon_{n+1}-\varepsilon_n=1
-\]
-
-In physical units, the spacing is \(\hbar\omega\).
+or, in physical units, by $\hbar\omega$.
 
 ### 1.6 Analytical Wavefunctions
 
 The normalised analytical wavefunctions are
 
-\[
+$$
 \psi_n(q)
 =
-\frac{1}{\sqrt{2^n n!\sqrt{\pi}}}
-H_n(q)e^{-q^2/2}
-\]
+\frac{H_n(q)e^{-q^2/2}}
+{\pi^{1/4}\sqrt{2^n n!}},
+$$
 
-where:
+where $H_n(q)$ is the physicists' Hermite polynomial of degree $n$.
 
-- \(n\) is the quantum number.
-- \(H_n(q)\) is the physicists' Hermite polynomial of degree \(n\).
-- \(e^{-q^2/2}\) is the Gaussian factor.
-- The prefactor ensures normalisation.
+The first five Hermite polynomials are
 
-The first few Hermite polynomials are
+$$
+H_0(q)=1,
+$$
 
-\[
-H_0(q)=1
-\]
+$$
+H_1(q)=2q,
+$$
 
-\[
-H_1(q)=2q
-\]
+$$
+H_2(q)=4q^2-2,
+$$
 
-\[
-H_2(q)=4q^2-2
-\]
+$$
+H_3(q)=8q^3-12q,
+$$
 
-\[
-H_3(q)=8q^3-12q
-\]
+$$
+H_4(q)=16q^4-48q^2+12.
+$$
 
-\[
-H_4(q)=16q^4-48q^2+12
-\]
-
-The wavefunctions alternate in parity: states with even \(n\) are even functions, while states with odd \(n\) are odd functions.
-
-The \(n\)-th state has \(n\) nodes, excluding the asymptotic approach to zero at large distances.
+States with even $n$ have even parity, and states with odd $n$ have odd parity. The $n$-th oscillator eigenfunction has $n$ nodes.
 
 ### 1.7 Normalisation and Orthogonality
 
-A physically acceptable bound-state wavefunction must be normalised:
+A normalised bound-state wavefunction satisfies
 
-\[
-\int_{-\infty}^{\infty}
-|\psi_n(q)|^2\,dq=1
-\]
+$$
+\int_{-\infty}^{\infty}|\psi_n(q)|^2\,dq=1.
+$$
 
 Different energy eigenstates are orthogonal:
 
-\[
+$$
 \int_{-\infty}^{\infty}
 \psi_m^*(q)\psi_n(q)\,dq
-=
-\delta_{mn}
-\]
+=\delta_{mn},
+$$
 
-where \(\delta_{mn}\) is the Kronecker delta.
+where $\delta_{mn}$ is the Kronecker delta.
 
-These properties provide useful criteria for validating the numerically calculated wavefunctions.
+These properties provide criteria for validating the numerical wavefunctions.
 
 ## 2. Numerical Methodology
 
 ### 2.1 Computational Domain and Grid Discretisation
 
-The analytical harmonic oscillator is defined over the infinite domain
+The analytical oscillator is defined over the infinite domain
 
-\[
--\infty < q < \infty
-\]
+$$
+-\infty<q<\infty.
+$$
 
-However, numerical calculations require a finite computational domain. We therefore restrict the dimensionless coordinate to
+Numerical calculations use a finite interval
 
-\[
-q_{\min} \leq q \leq q_{\max}
-\]
+$$
+q_{\min}\leq q\leq q_{\max}.
+$$
 
-The computational domain is discretised into a uniformly spaced grid. For a grid containing \(N\) interior points, the grid spacing is
+For $N$ interior points on a uniform grid, with the endpoints treated as boundaries, the spacing is
 
-\[
-h=\frac{q_{\max}-q_{\min}}{N+1}
-\]
+$$
+h=\frac{q_{\max}-q_{\min}}{N+1}.
+$$
 
 The interior grid points are
 
-\[
-q_i=q_{\min}+ih,\qquad i=1,2,\ldots,N
-\]
+$$
+q_i=q_{\min}+ih,
+\qquad i=1,2,\ldots,N.
+$$
 
-The wavefunction is represented by its values at these grid points:
+The wavefunction is represented by its values at the grid points:
 
-\[
-\psi(q_i)\approx\psi_i
-\]
+$$
+\psi(q_i)\approx\psi_i.
+$$
 
-The wavefunction is assumed to approach zero at the boundaries of a sufficiently large computational domain. This approximation is appropriate for bound states whose probability densities become negligible near the domain boundaries.
+The finite-domain calculation effectively imposes zero wavefunction values at the endpoints. This is a good approximation when the bound-state wavefunctions are negligible there. The adequacy of the chosen domain is examined separately through domain convergence.
 
-### 2.2 Finite-Difference Approximation
+### 2.2 Central Finite-Difference Approximation
 
-The dimensionless time-independent Schrödinger equation is
+The dimensionless Schrödinger equation is
 
-\[
--\frac12\frac{d^2\psi(q)}{dq^2}
-+\frac12q^2\psi(q)
-=\varepsilon\psi(q)
-\]
+$$
+-\frac{1}{2}\frac{d^2\psi(q)}{dq^2}
++\frac{1}{2}q^2\psi(q)
+=\varepsilon\psi(q).
+$$
 
-The second derivative is approximated using the central finite-difference formula:
+At grid point $q_i$, the central finite-difference approximation is
 
-\[
-\frac{d^2\psi}{dq^2}\bigg|_{q_i}
+$$
+\left.\frac{d^2\psi}{dq^2}\right|_{q_i}
 \approx
-\frac{\psi_{i+1}-2\psi_i+\psi_{i-1}}{h^2}
-\]
+\frac{\psi_{i+1}-2\psi_i+\psi_{i-1}}{h^2}.
+$$
 
-This approximation replaces the continuous second derivative with a combination of wavefunction values at neighbouring grid points.
+Substituting this approximation into the Schrödinger equation gives
 
-Substituting it into the Schrödinger equation gives
-
-\[
+$$
 -\frac{\psi_{i+1}-2\psi_i+\psi_{i-1}}{2h^2}
-+\frac12q_i^2\psi_i
-=\varepsilon\psi_i
-\]
++\frac{1}{2}q_i^2\psi_i
+=\varepsilon\psi_i.
+$$
 
 Rearranging,
 
-\[
+$$
 -\frac{1}{2h^2}\psi_{i-1}
 +
-\left(\frac{1}{h^2}+\frac12q_i^2\right)\psi_i
--
-\frac{1}{2h^2}\psi_{i+1}
-=
-\varepsilon\psi_i
-\]
+\left(\frac{1}{h^2}+\frac{1}{2}q_i^2\right)\psi_i
+-\frac{1}{2h^2}\psi_{i+1}
+=\varepsilon\psi_i.
+$$
 
-This equation relates the wavefunction at a grid point to its values at the two neighbouring points.
+The central finite-difference approximation has a leading truncation error of order $h^2$ for sufficiently smooth functions.
 
 ### 2.3 Construction of the Hamiltonian Matrix
 
-The discretised Schrödinger equation can be expressed as a matrix eigenvalue problem:
+The discretised equation is written as a matrix eigenvalue problem:
 
-\[
+$$
 \mathbf{H}\boldsymbol{\psi}
-=
-\varepsilon\boldsymbol{\psi}
-\]
+=\varepsilon\boldsymbol{\psi}.
+$$
 
-Here, \(\mathbf{H}\) is the discretised Hamiltonian matrix, \(\boldsymbol{\psi}\) is an eigenvector containing the wavefunction values at the grid points, and \(\varepsilon\) is the corresponding energy eigenvalue.
+The diagonal elements are
 
-The diagonal elements of the Hamiltonian are
+$$
+H_{ii}=\frac{1}{h^2}+\frac{1}{2}q_i^2,
+$$
 
-\[
-H_{ii}=\frac{1}{h^2}+\frac12q_i^2
-\]
+and the nearest-neighbour off-diagonal elements are
 
-The elements immediately above and below the diagonal are
+$$
+H_{i,i+1}=H_{i+1,i}=-\frac{1}{2h^2}.
+$$
 
-\[
-H_{i,i+1}=H_{i+1,i}=-\frac{1}{2h^2}
-\]
+All other elements are zero. The Hamiltonian is therefore tridiagonal. Its diagonal contains the finite-difference kinetic-energy contribution and the potential energy, while its off-diagonal elements arise from the kinetic-energy operator.
 
-All other elements are zero.
-
-Consequently, the Hamiltonian has a tridiagonal structure:
-
-\[
-\mathbf{H}=
-\begin{pmatrix}
-\frac{1}{h^2}+\frac12q_1^2 & -\frac{1}{2h^2} & 0 & \cdots & 0\\
--\frac{1}{2h^2} & \frac{1}{h^2}+\frac12q_2^2 & -\frac{1}{2h^2} & \cdots & 0\\
-0 & -\frac{1}{2h^2} & \frac{1}{h^2}+\frac12q_3^2 & \ddots & \vdots\\
-\vdots & \vdots & \ddots & \ddots & -\frac{1}{2h^2}\\
-0 & 0 & \cdots & -\frac{1}{2h^2} & \frac{1}{h^2}+\frac12q_N^2
-\end{pmatrix}
-\]
-
-The diagonal contains contributions from both kinetic and potential energy. The off-diagonal elements arise from the finite-difference approximation to the kinetic energy operator.
-
-The matrix is real and symmetric. Its eigenvalues are therefore real, and its eigenvectors corresponding to distinct eigenvalues are orthogonal under the standard discrete inner product.
+The matrix is real and symmetric, so its eigenvalues are real and its eigenvectors can be chosen orthogonal under the discrete Euclidean inner product.
 
 ### 2.4 Numerical Eigenvalue Solution
 
-The Hamiltonian eigenvalue problem is solved using a numerical eigensolver:
+The numerical eigenpairs satisfy
 
-\[
+$$
 \mathbf{H}\boldsymbol{\psi}_n
-=
-\varepsilon_n\boldsymbol{\psi}_n
-\]
+=\varepsilon_n\boldsymbol{\psi}_n.
+$$
 
-The eigenvalues are ordered from lowest to highest energy. The first eigenvalue corresponds to the ground state, while subsequent eigenvalues correspond to excited states.
+The eigenvalues are ordered from lowest to highest energy. The first eigenvalue corresponds to the ground state, and subsequent eigenvalues correspond to excited states.
 
-For this project, only the lowest five eigenstates are required. Computing this subset avoids calculating the entire spectrum when only a small number of low-energy states is of interest.
+The implementation uses `scipy.linalg.eigh` to solve the real symmetric matrix eigenvalue problem and requests only the lowest five states for the production calculation.
 
-The numerical eigenvalues are compared against the exact dimensionless energies:
+The numerical energies are compared with
 
-\[
-\varepsilon_n^{\mathrm{exact}}=n+\frac12
-\]
-
-The resulting differences quantify the accuracy of the numerical approximation.
+$$
+\varepsilon_n^{\mathrm{exact}}=n+\frac{1}{2}.
+$$
 
 ### 2.5 Numerical Wavefunction Scaling
 
 The eigensolver returns eigenvectors normalised according to the discrete Euclidean norm:
 
-\[
-\sum_{i=1}^{N}|v_i|^2=1
-\]
+$$
+\sum_{i=1}^{N}|v_i|^2=1.
+$$
 
-A continuum-normalised wavefunction should instead satisfy
+For a uniform grid, the corresponding continuum integral is approximated by a weighted sum. The eigenvectors are therefore scaled as
 
-\[
-\int_{-\infty}^{\infty}|\psi(q)|^2\,dq=1
-\]
+$$
+\psi_i=\frac{v_i}{\sqrt{h}}.
+$$
 
-Using a uniform grid, the integral is approximated by a weighted sum. Therefore, the discrete eigenvectors are scaled according to
-
-\[
-\psi_i=\frac{v_i}{\sqrt{h}}
-\]
-
-This scaling makes the eigenvectors suitable approximations to continuum-normalised wavefunctions.
-
-The resulting wavefunctions are checked numerically by evaluating
-
-\[
-\int |\psi_n(q)|^2\,dq
-\]
-
-using numerical integration over the computational grid.
+This gives wavefunctions with the appropriate continuum scaling. Their normalisation is then checked using numerical integration over the computational grid.
 
 ## 3. Numerical Validation and Convergence
 
-A numerical solution should not be considered reliable merely because an eigensolver returns eigenvalues and eigenvectors. The results must be tested against known solutions and checked for numerical consistency.
-
-The quantum harmonic oscillator is particularly suitable for this purpose because its exact energies and analytical wavefunctions are known.
-
 ### 3.1 Energy Eigenvalue Validation
 
-The exact dimensionless energy eigenvalues are
+The absolute energy error is
 
-\[
-\varepsilon_n^{\mathrm{exact}}=n+\frac12
-\]
-
-The numerical energies are obtained by diagonalising the discretised Hamiltonian. Their accuracy can be assessed using the absolute error:
-
-\[
+$$
 \Delta\varepsilon_n
 =
 \left|
 \varepsilon_n^{\mathrm{numerical}}
--
-\varepsilon_n^{\mathrm{exact}}
-\right|
-\]
+-\varepsilon_n^{\mathrm{exact}}
+\right|.
+$$
 
-The relative error is defined as
+The relative energy error is
 
-\[
+$$
 \delta_n
 =
 \frac{
 \left|
 \varepsilon_n^{\mathrm{numerical}}
--
-\varepsilon_n^{\mathrm{exact}}
+-\varepsilon_n^{\mathrm{exact}}
 \right|
 }{
 \left|\varepsilon_n^{\mathrm{exact}}\right|
-}
-\]
+}.
+$$
 
-The relative error expressed as a percentage is
+The percentage relative error is
 
-\[
-\delta_n(\%)=100\delta_n
-\]
+$$
+\delta_n(\%)=100\delta_n.
+$$
 
-These quantities measure the difference between the calculated energies and the analytical reference values.
-
-The absolute error indicates the magnitude of the discrepancy, while the relative error expresses that discrepancy relative to the magnitude of the exact energy.
+Absolute error measures the magnitude of the discrepancy, while relative error expresses it relative to the exact energy.
 
 ### 3.2 Wavefunction Normalisation
 
-A wavefunction must satisfy the normalisation condition
+The normalisation integral is
 
-\[
-\int_{-\infty}^{\infty}|\psi_n(q)|^2\,dq=1
-\]
+$$
+I_n=\int_{q_{\min}}^{q_{\max}}|\psi_n(q)|^2\,dq.
+$$
 
-Because the numerical wavefunctions are defined on a finite grid, the integral is evaluated numerically:
-
-\[
-I_n\approx
-\int_{q_{\min}}^{q_{\max}}|\psi_n(q)|^2\,dq
-\]
-
-The numerical integration is performed using the trapezoidal rule.
-
-A value of \(I_n\) close to unity indicates that the calculated wavefunction satisfies the normalisation condition over the chosen domain.
-
-However, normalisation alone does not establish that a wavefunction is correct. An incorrectly shaped wavefunction can also be normalised. Therefore, the numerical wavefunctions are additionally compared with the analytical solutions.
+It is evaluated numerically using the trapezoidal rule. A value close to unity indicates that the wavefunction is normalised over the selected domain. Normalisation alone does not establish that the wavefunction has the correct shape, so comparison with analytical wavefunctions is also performed.
 
 ### 3.3 Wavefunction Comparison
 
-The analytical and numerical wavefunctions can differ by an overall sign without representing physically different states. If \(\psi_n(q)\) is an eigenfunction, then \(-\psi_n(q)\) is also an eigenfunction with the same energy.
+An eigenfunction can be multiplied by an overall sign without changing its physical state. The numerical wavefunction is therefore sign-aligned with the analytical wavefunction before calculating the difference.
 
-Consequently, the numerical wavefunction is aligned in sign with the analytical wavefunction before comparison.
+The absolute overlap is
 
-The overlap between the two normalised wavefunctions is
-
-\[
+$$
 S_n=
 \left|
 \int
 \psi_n^{\mathrm{analytical}}(q)
 \psi_n^{\mathrm{numerical}}(q)\,dq
-\right|
-\]
+\right|.
+$$
 
-For perfectly matching normalised wavefunctions, the overlap is unity.
+For matching normalised wavefunctions, the overlap is unity.
 
-The relative \(L^2\) error provides another measure of agreement:
+The relative $L^2$ error is
 
-\[
+$$
 e_n=
 \frac{
 \left\|
 \psi_n^{\mathrm{numerical}}
--
-\psi_n^{\mathrm{analytical}}
+-\psi_n^{\mathrm{analytical}}
 \right\|_2
 }{
-\left\|
-\psi_n^{\mathrm{analytical}}
-\right\|_2
-}
-\]
+\left\|\psi_n^{\mathrm{analytical}}\right\|_2
+}.
+$$
 
-A smaller value indicates closer agreement between the numerical and analytical wavefunctions.
+A smaller value indicates closer agreement.
 
 ### 3.4 Eigenpair Residuals
 
-The numerical eigenvalues and eigenvectors should satisfy the discretised eigenvalue equation
+The residual vector is
 
-\[
-\mathbf{H}\boldsymbol{\psi}_n
-=
-\varepsilon_n\boldsymbol{\psi}_n
-\]
-
-The residual vector is defined as
-
-\[
+$$
 \mathbf{r}_n
 =
 \mathbf{H}\boldsymbol{\psi}_n
--
-\varepsilon_n\boldsymbol{\psi}_n
-\]
+-\varepsilon_n\boldsymbol{\psi}_n.
+$$
 
 Its Euclidean norm is
 
-\[
-R_n=\|\mathbf{r}_n\|_2
-\]
+$$
+R_n=\|\mathbf{r}_n\|_2.
+$$
 
-A small residual indicates that the computed eigenpair satisfies the discretised matrix equation to high numerical accuracy.
-
-This test assesses the numerical eigensolver and the consistency of the computed eigenpairs with the Hamiltonian matrix.
-
-An important distinction is that a small residual does not necessarily imply that the numerical energy is close to the exact physical energy. The residual measures agreement with the discretised problem, whereas the analytical energy error measures agreement with the continuous quantum harmonic oscillator.
+A small residual indicates that the computed eigenpair satisfies the discretised matrix equation to high numerical accuracy. It does not necessarily mean that the eigenvalue is equally close to the exact eigenvalue of the continuous differential equation. The residual assesses the matrix problem; the analytical energy error assesses the approximation to the continuous problem.
 
 ### 3.5 Grid Convergence
 
-The second derivative is approximated using a central finite-difference formula. This approximation has a leading truncation error proportional to \(h^2\), where \(h\) is the grid spacing.
+The grid convergence study keeps the domain fixed at $[-4,4]$ and refines the grid. For a sufficiently smooth wavefunction and an adequately large fixed domain, the leading finite-difference error is expected to scale as
 
-For a sufficiently smooth wavefunction and a fixed, adequately large computational domain, the leading discretisation error is therefore expected to scale approximately as
+$$
+\Delta\varepsilon_n\propto h^2.
+$$
 
-\[
-\Delta\varepsilon_n\propto h^2
-\]
+Halving the grid spacing should therefore reduce the leading discretisation error by approximately a factor of four when other error sources are small.
 
-When the grid spacing is reduced, the numerical approximation to the differential operator generally improves.
+An observed convergence order can be estimated from two calculations:
 
-A grid convergence study evaluates the calculated energies using progressively finer grids while keeping the computational domain fixed.
-
-For a second-order method, halving the grid spacing should reduce the leading discretisation error by approximately a factor of four, provided that other sources of error are sufficiently small.
-
-The observed convergence rate can be estimated from two calculations:
-
-\[
+$$
 p\approx
 \frac{
 \ln\left(|\Delta\varepsilon_{n,1}|/
 |\Delta\varepsilon_{n,2}|\right)
 }{
 \ln(h_1/h_2)
-}
-\]
+}.
+$$
 
-where \(h_1\) and \(h_2\) are two grid spacings and the corresponding errors are non-zero.
+This estimate requires non-zero errors and is most meaningful when the same error regime dominates both calculations.
 
-A value of \(p\) close to two is consistent with second-order convergence.
+The ground-state results show observed orders close to two as the grid is refined, consistent with the central finite-difference method. Higher-state energy errors can be more affected by the finite domain, so their convergence should be interpreted with that limitation in mind.
 
 ### 3.6 Domain Convergence
 
-The analytical harmonic oscillator extends over an infinite spatial domain, whereas the numerical calculation uses finite boundaries.
+A finite computational domain introduces an approximation because the exact problem extends over all space. If the boundaries are too close to the centre, the wavefunction may not have decayed sufficiently before reaching them.
 
-Restricting the domain introduces a separate source of error. If the boundaries are too close to the oscillator's centre, the wavefunction may not have decayed sufficiently before reaching them.
+The domain study compares
 
-A domain convergence study investigates this effect by increasing the domain size while keeping the grid spacing approximately constant.
+$$
+[-4,4],\quad[-6,6],\quad[-8,8],\quad[-10,10],
+$$
 
-For this project, the domains examined are
+while maintaining a target grid spacing of approximately $0.04$.
 
-\[
-[-4,4],\quad[-6,6],\quad[-8,8],\quad[-10,10]
-\]
-
-The grid spacing is maintained at approximately \(0.04\).
-
-The results are compared to determine whether increasing the domain changes the calculated low-energy eigenvalues significantly.
-
-Once the energies become insensitive to further increases in the domain size, the remaining error is expected to be dominated by other numerical approximations, particularly the finite-difference discretisation.
+The first five energies become effectively unchanged between $[-8,8]$ and $[-10,10]$. This supports using $[-8,8]$ for the production calculation at the selected resolution. It does not eliminate finite-difference discretisation error.
 
 ### 3.7 Sources of Numerical Error
 
-The principal sources of error in this calculation are:
+The main sources of numerical error are:
 
-1. **Finite-difference discretisation:** The continuous second derivative is approximated on a discrete grid.
-2. **Finite computational domain:** The infinite spatial domain is replaced by a bounded interval.
-3. **Numerical integration:** Normalisation and wavefunction comparison involve approximating continuous integrals.
-4. **Floating-point arithmetic:** Numerical operations are performed with finite precision.
+1. **Finite-difference discretisation:** the second derivative is approximated on a discrete grid.
+2. **Finite computational domain:** the infinite domain is replaced by a bounded interval.
+3. **Numerical integration:** continuous integrals are approximated numerically.
+4. **Floating-point arithmetic:** computations use finite-precision numbers.
 
-These sources of error should be distinguished when interpreting the results. In particular, improving the grid spacing and increasing the domain size address different limitations and should be investigated separately.
+Grid refinement and domain enlargement address different sources of error and should be investigated independently.
 
 ## 4. Results and Discussion
 
 ### 4.1 Energy Eigenvalues
 
-The lowest five eigenvalues were calculated by diagonalising the discretised Hamiltonian over the dimensionless domain \([-8,8]\), using 399 interior grid points and a grid spacing of \(0.04\).
+The production calculation uses the domain $[-8,8]$, 399 interior grid points, a grid spacing of $0.04$, and five states.
 
-The numerical eigenvalues were compared with the exact harmonic oscillator energies:
+| Quantum number $n$ | Exact energy | Numerical energy | Absolute error |
+|---:|---:|---:|---:|
+| 0 | 0.5000000000 | 0.4999499950 | $5.0005\times10^{-5}$ |
+| 1 | 1.5000000000 | 1.4997499550 | $2.5005\times10^{-4}$ |
+| 2 | 2.5000000000 | 2.4993498249 | $6.5018\times10^{-4}$ |
+| 3 | 3.5000000000 | 3.4987495446 | $1.2505\times10^{-3}$ |
+| 4 | 4.5000000000 | 4.4979490539 | $2.0509\times10^{-3}$ |
 
-\[
-\varepsilon_n^{\mathrm{exact}}=n+\frac12
-\]
-
-The calculated values are summarised below.
-
-| Quantum number \(n\) | Exact energy | Numerical energy |
-|---:|---:|---:|
-| 0 | 0.500000 | 0.499950 |
-| 1 | 1.500000 | 1.499750 |
-| 2 | 2.500000 | 2.499350 |
-| 3 | 3.500000 | 3.498750 |
-| 4 | 4.500000 | 4.497949 |
-
-The numerical energies are close to the analytical values. The discrepancies arise primarily from the finite-difference approximation to the kinetic energy operator.
-
-The absolute energy error increases across the five states. This is consistent with the greater sensitivity of higher-energy states to the discretisation, although the precise error also depends on the grid spacing and computational domain.
+The numerical values are close to the analytical energy levels. The remaining discrepancies are primarily due to the finite-difference approximation. The absolute error increases across these five states, illustrating that higher-energy states can be more sensitive to the discretisation.
 
 ### 4.2 Wavefunction Validation
 
-The calculated wavefunctions were checked for normalisation and compared with the corresponding analytical solutions.
+The numerical normalisation integrals for all five states are 1.000000000000 to the displayed precision.
 
-For all five states, the numerical normalisation integrals were approximately unity to the displayed precision.
+The measured relative $L^2$ errors are:
 
-The relative \(L^2\) errors obtained from the wavefunction comparison were:
-
-| Quantum number \(n\) | Relative \(L^2\) error |
+| Quantum number $n$ | Relative $L^2$ error |
 |---:|---:|
-| 0 | \(7.36\times10^{-5}\) |
-| 1 | \(2.09\times10^{-4}\) |
-| 2 | \(4.18\times10^{-4}\) |
-| 3 | \(7.12\times10^{-4}\) |
-| 4 | \(1.10\times10^{-3}\) |
+| 0 | $7.36\times10^{-5}$ |
+| 1 | $2.09\times10^{-4}$ |
+| 2 | $4.18\times10^{-4}$ |
+| 3 | $7.12\times10^{-4}$ |
+| 4 | $1.10\times10^{-3}$ |
 
-The small relative errors indicate strong agreement between the numerical and analytical wavefunctions.
-
-The error increases with the quantum number for the five states examined. Higher-energy states exhibit more spatial structure, including additional nodes, which makes accurate representation on a finite grid more demanding.
-
-The numerical and analytical wavefunctions therefore provide complementary validation: the energy comparison assesses the spectrum, while the wavefunction comparison assesses the calculated eigenstates.
+The small errors indicate strong agreement between the numerical and analytical wavefunctions. The errors increase with quantum number for the states examined, consistent with the greater spatial structure of higher states.
 
 ### 4.3 Eigenpair Residuals
 
-The numerical eigenpairs were checked using the residual
+For the production calculation, the maximum residual norm among the five eigenpairs was approximately
 
-\[
-\mathbf{r}_n
-=
-\mathbf{H}\boldsymbol{\psi}_n
--
-\varepsilon_n\boldsymbol{\psi}_n
-\]
+$$
+R_{\max}\approx1.81\times10^{-13}.
+$$
 
-The residual norms were calculated using the same discretised Hamiltonian that was used to obtain the eigenvalues.
-
-Small residual norms indicate that the computed eigenvalues and eigenvectors satisfy the matrix eigenvalue equation to high numerical accuracy.
-
-For the production calculation, the maximum residual norm among the five
-computed eigenpairs was approximately
-
-\[
-R_{\max}\approx 1.81\times10^{-13}
-\]
-
-This small value indicates that the computed eigenpairs satisfy the discretised Hamiltonian eigenvalue equation to high numerical accuracy. It does not imply that the discretisation error relative to the exact continuous problem is equally small.
+This indicates that the computed eigenpairs satisfy the discretised matrix eigenvalue equation to high numerical accuracy. The residual is much smaller than the energy discrepancies relative to the continuous analytical solution because the residual measures the matrix eigensolver's solution of the discretised problem.
 
 ### 4.4 Grid Convergence
 
-The grid convergence study examined the effect of changing the grid resolution while maintaining the domain \([-4,4]\).
+The grid convergence study used the fixed domain $[-4,4]$ and the following resolutions:
 
-For the ground state, the absolute energy errors decreased as follows:
-
-| Grid points | Grid spacing | Ground-state absolute error |
+| Interior grid points | Grid spacing | Ground-state absolute error |
 |---:|---:|---:|
-| 49 | 0.16 | \(8.01\times10^{-4}\) |
-| 99 | 0.08 | \(2.00\times10^{-4}\) |
-| 199 | 0.04 | \(4.95\times10^{-5}\) |
-| 399 | 0.02 | \(1.20\times10^{-5}\) |
+| 49 | 0.16 | $8.0074\times10^{-4}$ |
+| 99 | 0.08 | $1.9958\times10^{-4}$ |
+| 199 | 0.04 | $4.9511\times10^{-5}$ |
+| 399 | 0.02 | $1.2009\times10^{-5}$ |
 
-The ground-state error decreases by approximately a factor of four when the grid spacing is halved. This is consistent with the second-order accuracy expected from the central finite-difference approximation.
+The ground-state error decreases by approximately a factor of four when the grid spacing is halved. The observed orders are close to two, as expected for the central finite-difference approximation.
 
-The behaviour of higher-energy states must be interpreted with additional care because their errors can be influenced by the finite computational domain as well as the grid spacing.
+The higher-state errors are affected by both grid spacing and finite-domain effects. Consequently, they do not always show the same clean monotonic behaviour as the ground state.
 
 ### 4.5 Domain Convergence
 
-The domain convergence study compared the first five energy eigenvalues over the intervals \([-4,4]\), \([-6,6]\), \([-8,8]\), and \([-10,10]\), maintaining a grid spacing of approximately \(0.04\).
+At a target grid spacing of approximately $0.04$, the domain study compared $[-4,4]$, $[-6,6]$, $[-8,8]$, and $[-10,10]$.
 
-The results changed appreciably between the smaller domains, particularly for the higher-energy states. However, the calculated energies became effectively unchanged between \([-8,8]\) and \([-10,10]\).
+The differences between the energy values for $[-8,8]$ and $[-10,10]$ are negligible at the displayed numerical precision. This indicates that the selected domain is sufficiently large for the first five states at this resolution.
 
-This indicates that the finite-domain effect is negligible for the first five states at the selected resolution when the domain is \([-8,8]\).
+The remaining energy discrepancies are therefore dominated primarily by finite-difference discretisation rather than the finite domain.
 
-The remaining discrepancy from the exact energies is therefore primarily associated with the finite-difference discretisation rather than the choice of domain.
+### 4.6 Overall Interpretation
 
-### 4.6 Interpretation
+The numerical method reproduces the low-energy spectrum and wavefunctions of the quantum harmonic oscillator with good accuracy. Energy comparisons, wavefunction normalisation, analytical wavefunction comparison, eigenpair residuals, and convergence studies provide complementary checks.
 
-The results demonstrate that the finite-difference method can reproduce the low-energy spectrum and wavefunctions of the quantum harmonic oscillator with good accuracy.
-
-The combination of energy comparisons, wavefunction validation, eigenpair residuals, grid convergence, and domain convergence provides a more complete assessment than any single test.
-
-The study also illustrates an important principle in computational quantum mechanics: numerical accuracy depends on both the discretisation of the differential operator and the representation of the spatial domain.
-
-Although the calculated results agree closely with the analytical solution, further improvements in grid resolution would be required to reduce the remaining discretisation errors.
+The results illustrate that a reliable computational quantum mechanics calculation requires more than obtaining eigenvalues from a numerical solver. The discretisation, spatial domain, wavefunctions, and convergence behaviour must also be examined.
 
 ## 5. Project Structure and Reproducibility
 
 ### 5.1 Project Organisation
 
-The project separates the mathematical model, numerical implementation, validation procedures, and generated results into distinct components.
-
-The main directories and files serve the following purposes:
+The project is organised into separate components:
 
 | Component | Purpose |
 |---|---|
-| `src/` | Contains the core numerical implementation |
-| `src/hamiltonian.py` | Defines the computational grid and constructs the Hamiltonian matrix |
-| `src/analytical_solution.py` | Implements the exact energy eigenvalues and analytical wavefunctions |
-| `src/harmonic_oscillator.py` | Solves the discretised eigenvalue problem and returns the numerical eigenstates |
-| `scripts/` | Contains scripts for calculations, validation, plotting, and convergence studies |
-| `tests/` | Contains automated tests for the implementation |
-| `results/` | Stores generated plots and numerical data |
+| `src/hamiltonian.py` | Defines the grid and constructs the Hamiltonian matrix |
+| `src/analytical_solution.py` | Implements analytical energies and wavefunctions |
+| `src/harmonic_oscillator.py` | Solves the numerical eigenvalue problem |
+| `scripts/` | Contains calculation, plotting, validation, and convergence scripts |
+| `tests/` | Contains automated tests |
+| `results/` | Stores generated numerical data and figures |
 | `theory/` | Contains theoretical documentation |
-| `report/` | Reserved for the final project report |
-| `README.md` | Provides an overview of the project and instructions for use |
-| `requirements.txt` | Lists the Python dependencies required by the project |
+| `report/` | Contains the technical report |
+| `README.md` | Gives the project overview and execution instructions |
+| `requirements.txt` | Lists direct Python dependencies |
 
-### 5.2 Software and Dependencies
+### 5.2 Dependencies
 
-The implementation uses Python and the following scientific computing libraries:
+The project uses:
 
-- **NumPy:** Numerical arrays and mathematical operations.
-- **SciPy:** Linear algebra routines, including the symmetric eigensolver, and evaluation of Hermite polynomials.
-- **Matplotlib:** Visualisation of wavefunctions and probability densities.
-- **pytest:** Automated testing of the implementation.
+- **NumPy** for arrays and numerical operations.
+- **SciPy** for linear algebra and Hermite polynomials.
+- **Matplotlib** for visualisation.
+- **pytest** for automated testing.
 
-The Python environment should contain compatible versions of these dependencies.
-
-Install the dependencies using
+Install the dependencies from the project root using
 
 ```bash
 python -m pip install -r requirements.txt
+```
+
+The versions in `requirements.txt` record the direct dependency versions used for the project.
+
+### 5.3 Main Calculation
+
+Run the production calculation from the project root:
+
+```bash
+python -m scripts.run_calculation
+```
+
+The script writes `results/energy_comparison.csv` and `results/validation_metrics.csv`.
+
+### 5.4 Visualisation and Analysis Scripts
+
+Generate plots:
+
+```bash
+python -m scripts.plot_wavefunctions
+```
+
+Validate the numerical wavefunctions:
+
+```bash
+python -m scripts.validate_wavefunctions
+```
+
+Run the grid convergence study:
+
+```bash
+python -m scripts.convergence_study
+```
+
+Run the domain convergence study:
+
+```bash
+python -m scripts.domain_convergence
+```
+
+Run the wavefunction convergence study:
+
+```bash
+python -m scripts.wavefunction_convergence
+```
+
+Calculate the low-lying eigenvalues using the separate eigenvalue script:
+
+```bash
+python -m scripts.solve_eigenvalues
+```
+
+These commands should be executed from the project root so that module imports and relative paths resolve correctly.
+
+### 5.5 Automated Tests
+
+Run the test suite:
+
+```bash
+python -m pytest tests/
+```
+
+The recorded test run completed with 10 tests passing. The tests check selected behaviour of the analytical and numerical implementation; they complement rather than replace the physical validation and convergence studies.
+
+### 5.6 Reproducibility Configuration
+
+The production configuration is:
+
+| Parameter | Value |
+|---|---:|
+| Dimensionless domain | $[-8,8]$ |
+| Interior grid points | 399 |
+| Grid spacing | 0.04 |
+| Number of states | 5 |
+| Differential operator approximation | Central finite difference |
+| Eigenvalue solver | `scipy.linalg.eigh` |
+
+To reproduce the calculation, install the listed dependencies, run the main calculation, inspect the generated CSV files, regenerate the plots if needed, and execute the validation scripts and automated tests.
