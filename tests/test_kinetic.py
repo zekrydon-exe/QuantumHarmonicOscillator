@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 from src.hamiltonian import create_grid, kinetic_energy
 
@@ -59,3 +60,18 @@ def test_kinetic_matrix_is_tridiagonal():
     )
 
     assert np.allclose(T, tridiagonal_T)
+
+
+@pytest.mark.parametrize("n_points", [0, -1, 1.5, True, "5", None])
+def test_kinetic_energy_rejects_invalid_n_points(n_points):
+    with pytest.raises(ValueError):
+        kinetic_energy(n_points, 0.1)
+
+
+@pytest.mark.parametrize(
+    "dq",
+    [0, -0.1, np.nan, np.inf, -np.inf, True, "0.1", None],
+)
+def test_kinetic_energy_rejects_invalid_dq(dq):
+    with pytest.raises(ValueError):
+        kinetic_energy(5, dq)

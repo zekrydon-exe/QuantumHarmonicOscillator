@@ -62,7 +62,7 @@ For a particle of mass m moving in a harmonic potential, the potential
 energy is
 
 $$
-V(x) = \\frac{1}{2}m\\omega^2x^2,
+V(x) = \frac{1}{2}m\omega^2x^2,
 $$
 
 where omega is the angular frequency of the oscillator.
@@ -70,12 +70,12 @@ where omega is the angular frequency of the oscillator.
 The time-independent Schrödinger equation is
 
 $$
--\\frac{\\hbar^2}{2m}
-\\frac{d^2\\psi(x)}{dx^2}
+-\frac{\hbar^2}{2m}
+\frac{d^2\psi(x)}{dx^2}
 +
-\\frac{1}{2}m\\omega^2x^2\\psi(x)
+\frac{1}{2}m\omega^2x^2\psi(x)
 =
-E\\psi(x).
+E\psi(x).
 $$
 
 Here, psi(x) is the stationary-state wavefunction and E is the
@@ -86,41 +86,41 @@ corresponding energy eigenvalue.
 Introduce the dimensionless coordinate
 
 $$
-q = \\sqrt{\\frac{m\\omega}{\\hbar}}\\,x
+q = \sqrt{\frac{m\omega}{\hbar}}\,x
 $$
 
 and the dimensionless energy
 
 $$
-\\varepsilon = \\frac{E}{\\hbar\\omega}.
+\varepsilon = \frac{E}{\hbar\omega}.
 $$
 
 The Schrödinger equation becomes
 
 $$
--\\frac{1}{2}\\frac{d^2\\psi(q)}{dq^2}
+-\frac{1}{2}\frac{d^2\psi(q)}{dq^2}
 +
-\\frac{1}{2}q^2\\psi(q)
+\frac{1}{2}q^2\psi(q)
 =
-\\varepsilon\\psi(q).
+\varepsilon\psi(q).
 $$
 
 Equivalently, the dimensionless Hamiltonian is
 
 $$
-\\hat{H}
+\hat{H}
 =
--\\frac{1}{2}\\frac{d^2}{dq^2}
+-\frac{1}{2}\frac{d^2}{dq^2}
 +
-\\frac{1}{2}q^2.
+\frac{1}{2}q^2.
 $$
 
 The corresponding eigenvalue equation is
 
 $$
-\\hat{H}\\psi_n(q)
+\hat{H}\psi_n(q)
 =
-\\varepsilon_n\\psi_n(q).
+\varepsilon_n\psi_n(q).
 $$
 
 This dimensionless representation removes the explicit dependence on
@@ -131,26 +131,26 @@ the particle mass and oscillator frequency from the numerical problem.
 The exact dimensionless energy eigenvalues are
 
 $$
-\\varepsilon_n = n + \\frac{1}{2},
-\\qquad n=0,1,2,\\ldots
+\varepsilon_n = n + \frac{1}{2},
+\qquad n=0,1,2,\ldots
 $$
 
 The corresponding dimensional energies are
 
 $$
-E_n = \\hbar\\omega\\left(n+\\frac{1}{2}\\right).
+E_n = \hbar\omega\left(n+\frac{1}{2}\right).
 $$
 
 The ground-state energy is therefore
 
 $$
-\\varepsilon_0 = \\frac{1}{2}.
+\varepsilon_0 = \frac{1}{2}.
 $$
 
 The energy difference between consecutive states is constant:
 
 $$
-\\varepsilon_{n+1}-\\varepsilon_n=1.
+\varepsilon_{n+1}-\varepsilon_n=1.
 $$
 
 This equally spaced spectrum provides an important reference for
@@ -161,10 +161,10 @@ validating the numerical eigenvalues.
 The normalised analytical eigenfunctions are
 
 $$
-\\psi_n(q)
+\psi_n(q)
 =
-\\frac{H_n(q)e^{-q^2/2}}
-{\\pi^{1/4}\\sqrt{2^n n!}},
+\frac{H_n(q)e^{-q^2/2}}
+{\pi^{1/4}\sqrt{2^n n!}},
 $$
 
 where H_n(q) denotes the physicists' Hermite polynomial of degree n.
@@ -172,9 +172,9 @@ where H_n(q) denotes the physicists' Hermite polynomial of degree n.
 For the ground state, H_0(q) = 1, giving
 
 $$
-\\psi_0(q)
+\psi_0(q)
 =
-\\frac{1}{\\pi^{1/4}}e^{-q^2/2}.
+\frac{1}{\pi^{1/4}}e^{-q^2/2}.
 $$
 
 These analytical wavefunctions provide reference solutions for examining
@@ -186,17 +186,17 @@ A physically admissible bound-state wavefunction must satisfy the
 normalisation condition
 
 $$
-\\int_{-\\infty}^{\\infty}
-|\\psi_n(q)|^2\\,dq=1.
+\int_{-\infty}^{\infty}
+|\psi_n(q)|^2\,dq=1.
 $$
 
 Different energy eigenstates of this Hamiltonian are orthogonal:
 
 $$
-\\int_{-\\infty}^{\\infty}
-\\psi_m^*(q)\\psi_n(q)\\,dq
+\int_{-\infty}^{\infty}
+\psi_m^*(q)\psi_n(q)\,dq
 =
-\\delta_{mn},
+\delta_{mn},
 $$
 
 where delta_mn is the Kronecker delta.
@@ -215,16 +215,16 @@ containing N interior points between the boundaries q_min and q_max.
 The grid spacing is defined as
 
 $$
-\\Delta q
+\Delta q
 =
-\\frac{q_{\\max}-q_{\\min}}{N+1}.
+\frac{q_{\max}-q_{\min}}{N+1}.
 $$
 
 The interior grid coordinates are
 
 $$
-q_i=q_{\\min}+i\\Delta q,
-\\qquad i=1,2,\\ldots,N.
+q_i=q_{\min}+i\Delta q,
+\qquad i=1,2,\ldots,N.
 $$
 
 The boundary values are excluded from the array of interior points.
@@ -234,14 +234,14 @@ computational boundaries.
 For the standard calculation,
 
 $$
-q_{\\min}=-8,\\qquad q_{\\max}=8,
-\\qquad N=399.
+q_{\min}=-8,\qquad q_{\max}=8,
+\qquad N=399.
 $$
 
 Consequently,
 
 $$
-\\Delta q=\\frac{16}{400}=0.04.
+\Delta q=\frac{16}{400}=0.04.
 $$
 
 ### 4.2 Finite-difference approximation
@@ -250,41 +250,41 @@ The second derivative is approximated using the central
 finite-difference formula:
 
 $$
-\\frac{d^2\\psi}{dq^2}\\bigg|_{q_i}
-\\approx
-\\frac{
-\\psi_{i+1}-2\\psi_i+\\psi_{i-1}
-}{(\\Delta q)^2}.
+\frac{d^2\psi}{dq^2}\bigg|_{q_i}
+\approx
+\frac{
+\psi_{i+1}-2\psi_i+\psi_{i-1}
+}{(\Delta q)^2}.
 $$
 
 Substituting this expression into the dimensionless Schrödinger
 equation gives
 
 $$
--\\frac{1}{2}
-\\frac{
-\\psi_{i+1}-2\\psi_i+\\psi_{i-1}
-}{(\\Delta q)^2}
+-\frac{1}{2}
+\frac{
+\psi_{i+1}-2\psi_i+\psi_{i-1}
+}{(\Delta q)^2}
 +
-\\frac{q_i^2}{2}\\psi_i
+\frac{q_i^2}{2}\psi_i
 =
-\\varepsilon\\psi_i.
+\varepsilon\psi_i.
 $$
 
 Rearranging,
 
 $$
--\\frac{1}{2(\\Delta q)^2}\\psi_{i-1}
+-\frac{1}{2(\Delta q)^2}\psi_{i-1}
 +
-\\left[
-\\frac{1}{(\\Delta q)^2}
+\left[
+\frac{1}{(\Delta q)^2}
 +
-\\frac{q_i^2}{2}
-\\right]\\psi_i
+\frac{q_i^2}{2}
+\right]\psi_i
 -
-\\frac{1}{2(\\Delta q)^2}\\psi_{i+1}
+\frac{1}{2(\Delta q)^2}\psi_{i+1}
 =
-\\varepsilon\\psi_i.
+\varepsilon\psi_i.
 $$
 
 This expression defines the matrix elements of the discretised
@@ -295,15 +295,15 @@ Hamiltonian.
 The kinetic-energy operator is
 
 $$
-\\hat{T}
+\hat{T}
 =
--\\frac{1}{2}\\frac{d^2}{dq^2}.
+-\frac{1}{2}\frac{d^2}{dq^2}.
 $$
 
 Its finite-difference matrix has the diagonal elements
 
 $$
-T_{ii}=\\frac{1}{(\\Delta q)^2}
+T_{ii}=\frac{1}{(\Delta q)^2}
 $$
 
 and the nearest-neighbour off-diagonal elements
@@ -313,7 +313,7 @@ T_{i,i+1}
 =
 T_{i+1,i}
 =
--\\frac{1}{2(\\Delta q)^2}.
+-\frac{1}{2(\Delta q)^2}.
 $$
 
 All other elements are zero.
@@ -325,7 +325,7 @@ Therefore, the kinetic-energy matrix is tridiagonal and symmetric.
 The dimensionless potential energy is
 
 $$
-V(q)=\\frac{q^2}{2}.
+V(q)=\frac{q^2}{2}.
 $$
 
 In the position-grid representation, the potential-energy matrix is
@@ -334,10 +334,10 @@ diagonal:
 $$
 V_{ij}
 =
-\\begin{cases}
-\\dfrac{q_i^2}{2}, & i=j,\\\\
-0, & i\\ne j.
-\\end{cases}
+\begin{cases}
+\dfrac{q_i^2}{2}, & i=j,\
+0, & i\ne j.
+\end{cases}
 $$
 
 ### 4.5 Hamiltonian matrix
@@ -353,9 +353,9 @@ Its diagonal elements are
 $$
 H_{ii}
 =
-\\frac{1}{(\\Delta q)^2}
+\frac{1}{(\Delta q)^2}
 +
-\\frac{q_i^2}{2},
+\frac{q_i^2}{2},
 $$
 
 while the nearest-neighbour elements are
@@ -365,7 +365,7 @@ H_{i,i+1}
 =
 H_{i+1,i}
 =
--\\frac{1}{2(\\Delta q)^2}.
+-\frac{1}{2(\Delta q)^2}.
 $$
 
 The resulting matrix is real, symmetric and tridiagonal.
@@ -376,9 +376,9 @@ The discretised Schrödinger equation becomes the matrix eigenvalue
 problem
 
 $$
-H\\mathbf{v}_n
+H\mathbf{v}_n
 =
-\\varepsilon_n\\mathbf{v}_n,
+\varepsilon_n\mathbf{v}_n,
 $$
 
 where the eigenvalues approximate the dimensionless energies and
@@ -394,21 +394,21 @@ on a uniform coordinate grid, the implementation scales each
 eigenvector by
 
 $$
-\\psi_n(q_i)
+\psi_n(q_i)
 =
-\\frac{v_{i,n}}{\\sqrt{\\Delta q}}.
+\frac{v_{i,n}}{\sqrt{\Delta q}}.
 $$
 
 This scaling makes the discrete normalisation condition
 
 $$
-\\sum_i |v_{i,n}|^2=1
+\sum_i |v_{i,n}|^2=1
 $$
 
 consistent with the uniform-grid approximation
 
 $$
-\\sum_i |\\psi_n(q_i)|^2\\Delta q\\approx 1.
+\sum_i |\psi_n(q_i)|^2\Delta q\approx 1.
 $$
 
 ## 5. Software Implementation
@@ -519,7 +519,7 @@ using the standard configuration:
 The exact energy spectrum is
 
 $$
-\varepsilon_n=n+\\frac{1}{2}.
+\varepsilon_n=n+\frac{1}{2}.
 $$
 
 The numerical and analytical energies are compared in
@@ -553,7 +553,7 @@ The analytical harmonic-oscillator spectrum has equally spaced
 energy levels:
 
 $$
-\\varepsilon_{n+1}-\\varepsilon_n=1.
+\varepsilon_{n+1}-\varepsilon_n=1.
 $$
 
 The numerical energy levels reproduce this behaviour
@@ -571,7 +571,7 @@ stationary-state wavefunctions.
 The probability density associated with the nth state is
 
 $$
-\\rho_n(q)=|\\psi_n(q)|^2.
+\rho_n(q)=|\psi_n(q)|^2.
 $$
 
 The wavefunction and probability-density plots generated by the
@@ -626,19 +626,19 @@ The numerical energy eigenvalues are compared against the exact
 spectrum:
 
 $$
-\\varepsilon_n=n+\\frac{1}{2}.
+\varepsilon_n=n+\frac{1}{2}.
 $$
 
 The absolute error is defined as
 
 $$
-\\Delta\\varepsilon_n
+\Delta\varepsilon_n
 =
-\\left|
-\\varepsilon_n^{\\mathrm{numerical}}
+\left|
+\varepsilon_n^{\mathrm{numerical}}
 -
-\\varepsilon_n^{\\mathrm{exact}}
-\\right|.
+\varepsilon_n^{\mathrm{exact}}
+\right|.
 $$
 
 The values in Table 1 quantify the accuracy of the first five
@@ -649,7 +649,7 @@ numerical energy levels.
 The continuum normalisation condition is
 
 $$
-\\int_{-\\infty}^{\\infty}|\\psi_n(q)|^2\\,dq=1.
+\int_{-\infty}^{\infty}|\psi_n(q)|^2\,dq=1.
 $$
 
 The numerical approximation is evaluated using trapezoidal
@@ -657,8 +657,8 @@ integration over the computational grid:
 
 $$
 I_n
-\\approx
-\\int_{q_{\\min}}^{q_{\\max}}|\\psi_n(q)|^2\\,dq.
+\approx
+\int_{q_{\min}}^{q_{\max}}|\psi_n(q)|^2\,dq.
 $$
 
 The computed normalisation integrals are approximately equal
@@ -671,9 +671,9 @@ orthogonal. Their numerical overlap is evaluated as
 
 $$
 S_{mn}
-\\approx
-\\int_{q_{\\min}}^{q_{\\max}}
-\\psi_m(q)\\psi_n(q)\\,dq.
+\approx
+\int_{q_{\min}}^{q_{\max}}
+\psi_m(q)\psi_n(q)\,dq.
 $$
 
 For distinct states, the expected overlap is zero.
@@ -687,31 +687,31 @@ tolerance of 10⁻³.
 A numerical eigenpair should satisfy
 
 $$
-H\\mathbf{v}_n
-\\approx
-\\varepsilon_n\\mathbf{v}_n.
+H\mathbf{v}_n
+\approx
+\varepsilon_n\mathbf{v}_n.
 $$
 
 The residual vector is defined as
 
 $$
-\\mathbf{r}_n
+\mathbf{r}_n
 =
-H\\mathbf{v}_n-\\varepsilon_n\\mathbf{v}_n.
+H\mathbf{v}_n-\varepsilon_n\mathbf{v}_n.
 $$
 
 Its Euclidean norm is
 
 $$
-r_n=\\|\\mathbf{r}_n\\|_2.
+r_n=\|\mathbf{r}_n\|_2.
 $$
 
 For the standard calculation, the maximum residual norm
 reported for the five calculated states is approximately
 
 $$
-\\max_n r_n
-\\approx 1.81\\times10^{-13}.
+\max_n r_n
+\approx 1.81\times10^{-13}.
 $$
 
 This small residual indicates that the numerical eigenpairs
@@ -759,7 +759,7 @@ The grid-convergence study uses the fixed computational domain
 [-4, 4] and the following numbers of interior grid points:
 
 $$
-N\\in\\{49,99,199,399\\}.
+N\in\{49,99,199,399\}.
 $$
 
 For each grid, the numerical eigenvalues are compared with the
@@ -768,13 +768,13 @@ analytical values.
 The absolute error for state n is
 
 $$
-e_n(\\Delta q)
+e_n(\Delta q)
 =
-\\left|
-\\varepsilon_n^{\\mathrm{numerical}}
+\left|
+\varepsilon_n^{\mathrm{numerical}}
 -
-\\varepsilon_n^{\\mathrm{exact}}
-\\right|.
+\varepsilon_n^{\mathrm{exact}}
+\right|.
 $$
 
 For two calculations with spacings Δq₁ and Δq₂, the observed
@@ -783,10 +783,10 @@ convergence order is estimated by
 $$
 p
 =
-\\frac{
-\\ln\\left(e_n(\\Delta q_1)/e_n(\\Delta q_2)\\right)
+\frac{
+\ln\left(e_n(\Delta q_1)/e_n(\Delta q_2)\right)
 }{
-\\ln(\\Delta q_1/\\Delta q_2)
+\ln(\Delta q_1/\Delta q_2)
 }.
 $$
 

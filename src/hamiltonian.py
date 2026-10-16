@@ -80,22 +80,36 @@ def potential_energy(q: np.ndarray) -> np.ndarray:
 
 def kinetic_energy(n_points: int, dq: float) -> np.ndarray:
     """
+    Construct the kinetic-energy matrix using the central
+    finite-difference approximation.
+
     Parameters
+    ----------
     n_points : int
         Number of interior grid points.
     dq : float
         Uniform grid spacing.
 
     Returns
+    -------
     numpy.ndarray
         Kinetic-energy matrix.
     """
 
-    if n_points < 1:
-        raise ValueError("n_points must be at least 1.")
+    if (
+        isinstance(n_points, bool)
+        or not isinstance(n_points, (int, np.integer))
+        or n_points < 1
+    ):
+        raise ValueError("n_points must be a positive integer.")
 
-    if dq <= 0:
-        raise ValueError("dq must be positive.")
+    if (
+        isinstance(dq, bool)
+        or not isinstance(dq, (int, float, np.integer, np.floating))
+        or not np.isfinite(dq)
+        or dq <= 0
+    ):
+        raise ValueError("dq must be a finite positive number.")
 
     diagonal = np.full(n_points, 1.0 / dq**2)
 
@@ -104,12 +118,11 @@ def kinetic_energy(n_points: int, dq: float) -> np.ndarray:
         -1.0 / (2.0 * dq**2)
     )
 
-    T = np.diag(diagonal)
-
-    T += np.diag(off_diagonal, k=1)
-    T += np.diag(off_diagonal, k=-1)
-
-    return T
+    return (
+        np.diag(diagonal)
+        + np.diag(off_diagonal, k=1)
+        + np.diag(off_diagonal, k=-1)
+    )
 
 def build_hamiltonian(q: np.ndarray, dq: float) -> np.ndarray:
     """

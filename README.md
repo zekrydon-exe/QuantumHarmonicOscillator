@@ -222,7 +222,7 @@ Run the test suite from the project root:
 python -m pytest tests/
 ```
 
-The recorded test run completed with **10 tests passing**. The tests check selected behaviour of the analytical solution and numerical implementation. Passing tests support implementation reliability, but they do not replace physical validation and convergence analysis.
+The recorded test run completed with **61 tests passing**. The tests check selected behaviour of the analytical solution and numerical implementation. Passing tests support implementation reliability, but they do not replace physical validation and convergence analysis.
 
 ## 10. Recorded Numerical Results
 

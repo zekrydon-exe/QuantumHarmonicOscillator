@@ -13,12 +13,12 @@ def main():
 
     H = build_hamiltonian(q, dq)
 
-    energies, wavefunctions = eigh(H)
-
     n_states_to_show = 5
 
-    energies = energies[:n_states_to_show]
-    wavefunctions = wavefunctions[:, :n_states_to_show]
+    energies, wavefunctions = eigh(
+        H,
+        subset_by_index=(0, n_states_to_show - 1)
+    )
 
     residuals = H @ wavefunctions - wavefunctions * energies
 
