@@ -33,8 +33,15 @@ def solve_harmonic_oscillator(
         Each column represents one eigenstate.
     """
 
-    if not isinstance(n_states, (int, np.integer)):
+    if isinstance(n_states, (bool, np.bool_)) or not isinstance(
+        n_states, (int, np.integer)
+    ):
         raise TypeError("n_states must be an integer.")
+
+    if isinstance(n_points, (bool, np.bool_)) or not isinstance(
+        n_points, (int, np.integer)
+    ):
+        raise TypeError("n_points must be an integer.")
 
     if n_states < 1 or n_states > n_points:
         raise ValueError(

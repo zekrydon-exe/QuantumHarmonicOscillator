@@ -14,7 +14,6 @@ def main():
     results = []
 
     for n_points in grid_sizes:
-
         q, dq = create_grid(q_min, q_max, n_points)
 
         H = build_hamiltonian(q, dq)
@@ -22,7 +21,7 @@ def main():
         # Calculate only the five lowest eigenvalues.
         energies, wavefunctions = eigh(
             H,
-            subset_by_index=(0, n_states - 1)
+            subset_by_index=(0, n_states - 1),
         )
 
         # Exact dimensionless harmonic-oscillator energies.
@@ -44,24 +43,16 @@ def main():
             "relative_errors": relative_errors,
         })
 
-    # --------------------------------------------------
-    # 3. Print the energy convergence table
-    # --------------------------------------------------
-
     print("GRID CONVERGENCE STUDY")
-    print("=" * 85)
     print(f"Domain: [{q_min}, {q_max}]")
     print(f"Number of states analysed: {n_states}")
 
     for result in results:
-
-        print("\n" + "-" * 85)
+        print()
         print(
             f"Grid points: {result['n_points']:4d} | "
             f"Grid spacing: {result['dq']:.6f}"
         )
-
-        print("-" * 85)
 
         print(
             f"{'n':>3} "
@@ -71,12 +62,11 @@ def main():
             f"{'Relative Error (%)':>20}"
         )
 
-        print("-" * 85)
+        print()
 
         exact_energies = np.arange(n_states) + 0.5
 
         for n in range(n_states):
-
             numerical = result["energies"][n]
             exact = exact_energies[n]
 
@@ -91,12 +81,8 @@ def main():
                 f"{relative_error:20.8f}"
             )
 
-    # --------------------------------------------------
-    # 4. Estimate the convergence order
-    # --------------------------------------------------
-
-    print("\n\nOBSERVED CONVERGENCE ORDER")
-    print("=" * 85)
+    # Estimate the convergence order.
+    print("\nOBSERVED CONVERGENCE ORDER")
 
     print(
         f"{'n':>3} "
@@ -105,14 +91,10 @@ def main():
         f"{'199 -> 399':>15}"
     )
 
-    print("-" * 55)
-
     for n in range(n_states):
-
         observed_orders = []
 
         for i in range(len(results) - 1):
-
             h1 = results[i]["dq"]
             h2 = results[i + 1]["dq"]
 
@@ -120,9 +102,7 @@ def main():
             e2 = results[i + 1]["absolute_errors"][n]
 
             if e1 > 0 and e2 > 0:
-
                 order = np.log(e1 / e2) / np.log(h1 / h2)
-
             else:
                 order = np.nan
 

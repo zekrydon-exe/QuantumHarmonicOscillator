@@ -1,9 +1,11 @@
 import numpy as np
 
-
 def create_grid(q_min: float, q_max: float, n_points: int):
     """
+    Create a uniformly spaced grid excluding the boundaries.
+
     Parameters
+    ----------
     q_min : float
         Left boundary of the computational domain.
     q_max : float
@@ -12,14 +14,41 @@ def create_grid(q_min: float, q_max: float, n_points: int):
         Number of interior grid points.
 
     Returns
+    -------
     q : numpy.ndarray
         Array containing the interior grid points.
     dq : float
         Uniform grid spacing.
+
+    Raises
+    ------
+    TypeError
+        If the boundaries are not real numbers or n_points is not an integer.
+    ValueError
+        If the boundaries are non-finite, improperly ordered, or
+        n_points is less than 1.
     """
+
+    if isinstance(q_min, (bool, np.bool_)) or not isinstance(
+        q_min, (int, float, np.integer, np.floating)
+    ):
+        raise TypeError("q_min must be a real number.")
+
+    if isinstance(q_max, (bool, np.bool_)) or not isinstance(
+        q_max, (int, float, np.integer, np.floating)
+    ):
+        raise TypeError("q_max must be a real number.")
+
+    if not np.isfinite(q_min) or not np.isfinite(q_max):
+        raise ValueError("Grid boundaries must be finite.")
 
     if q_min >= q_max:
         raise ValueError("q_min must be smaller than q_max.")
+
+    if isinstance(n_points, (bool, np.bool_)) or not isinstance(
+        n_points, (int, np.integer)
+    ):
+        raise TypeError("n_points must be an integer.")
 
     if n_points < 1:
         raise ValueError("n_points must be at least 1.")
@@ -29,7 +58,7 @@ def create_grid(q_min: float, q_max: float, n_points: int):
     q = np.linspace(
         q_min + dq,
         q_max - dq,
-        n_points
+        n_points,
     )
 
     return q, dq

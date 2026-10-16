@@ -3,19 +3,47 @@ import numpy as np
 from src.hamiltonian import create_grid, potential_energy
 
 
-q, dq = create_grid(-4.0, 4.0, 9)
+def test_potential_matrix_has_correct_shape():
+    q, dq = create_grid(-4.0, 4.0, 9)
 
-V = potential_energy(q)
+    V = potential_energy(q)
 
-print("Potential-energy matrix:")
-print(V)
+    assert V.shape == (9, 9)
 
-print("\nMatrix shape:", V.shape)
-print("Diagonal elements:", np.diag(V))
 
-print("\nIs the matrix symmetric?", np.allclose(V, V.T))
-print("Are all potential energies non-negative?",
-      np.all(np.diag(V) >= 0))
+def test_potential_matrix_is_symmetric():
+    q, dq = create_grid(-4.0, 4.0, 9)
 
-print("Is the potential minimum at the origin?",
-      np.isclose(V[4, 4], 0.0))
+    V = potential_energy(q)
+
+    assert np.allclose(V, V.T)
+
+
+def test_potential_energy_values_are_correct():
+    q, dq = create_grid(-4.0, 4.0, 9)
+
+    V = potential_energy(q)
+
+    expected_diagonal = 0.5 * q**2
+
+    assert np.allclose(np.diag(V), expected_diagonal)
+
+
+def test_potential_matrix_is_diagonal():
+    q, dq = create_grid(-4.0, 4.0, 9)
+
+    V = potential_energy(q)
+
+    assert np.allclose(V, np.diag(np.diag(V)))
+
+
+def test_potential_energy_is_nonnegative_and_minimum_at_origin():
+    q, dq = create_grid(-4.0, 4.0, 9)
+
+    V = potential_energy(q)
+
+    potential_values = np.diag(V)
+
+    assert np.all(potential_values >= 0.0)
+    assert np.isclose(potential_values[4], 0.0)
+    assert np.isclose(np.min(potential_values), 0.0)

@@ -3,31 +3,59 @@ import numpy as np
 from src.hamiltonian import create_grid, kinetic_energy
 
 
-q, dq = create_grid(-4.0, 4.0, 9)
+def test_kinetic_matrix_has_correct_shape():
+    q, dq = create_grid(-4.0, 4.0, 9)
 
-T = kinetic_energy(len(q), dq)
+    T = kinetic_energy(len(q), dq)
 
-print("Kinetic-energy matrix:")
-print(T)
+    assert T.shape == (9, 9)
 
-print("\nMatrix shape:", T.shape)
-print("Main diagonal:", np.diag(T))
 
-print("Upper diagonal:", np.diag(T, k=1))
-print("Lower diagonal:", np.diag(T, k=-1))
+def test_kinetic_matrix_is_symmetric():
+    q, dq = create_grid(-4.0, 4.0, 9)
 
-print("\nIs the matrix symmetric?", np.allclose(T, T.T))
+    T = kinetic_energy(len(q), dq)
 
-expected_diagonal = 1.0 / dq**2
-expected_off_diagonal = -1.0 / (2.0 * dq**2)
+    assert np.allclose(T, T.T)
 
-print(
-    "Diagonal elements correct?",
-    np.allclose(np.diag(T), expected_diagonal)
-)
 
-print(
-    "Off-diagonal elements correct?",
-    np.allclose(np.diag(T, k=1), expected_off_diagonal)
-    and np.allclose(np.diag(T, k=-1), expected_off_diagonal)
-)
+def test_kinetic_matrix_diagonal_elements():
+    q, dq = create_grid(-4.0, 4.0, 9)
+
+    T = kinetic_energy(len(q), dq)
+
+    expected_diagonal = 1.0 / dq**2
+
+    assert np.allclose(np.diag(T), expected_diagonal)
+
+
+def test_kinetic_matrix_off_diagonal_elements():
+    q, dq = create_grid(-4.0, 4.0, 9)
+
+    T = kinetic_energy(len(q), dq)
+
+    expected_off_diagonal = -1.0 / (2.0 * dq**2)
+
+    assert np.allclose(
+        np.diag(T, k=1),
+        expected_off_diagonal,
+    )
+
+    assert np.allclose(
+        np.diag(T, k=-1),
+        expected_off_diagonal,
+    )
+
+
+def test_kinetic_matrix_is_tridiagonal():
+    q, dq = create_grid(-4.0, 4.0, 9)
+
+    T = kinetic_energy(len(q), dq)
+
+    tridiagonal_T = (
+        np.diag(np.diag(T))
+        + np.diag(np.diag(T, k=1), k=1)
+        + np.diag(np.diag(T, k=-1), k=-1)
+    )
+
+    assert np.allclose(T, tridiagonal_T)

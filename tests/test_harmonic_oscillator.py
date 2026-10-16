@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 from src.harmonic_oscillator import solve_harmonic_oscillator
 from src.analytical_solution import analytical_energy
@@ -102,3 +103,52 @@ def test_eigenpair_residuals():
     residual_norms = np.linalg.norm(residuals, axis=0)
 
     assert np.max(residual_norms) < 1e-10
+
+def test_solver_rejects_boolean_n_states():
+    with pytest.raises(TypeError):
+        solve_harmonic_oscillator(
+            q_min=-8.0,
+            q_max=8.0,
+            n_points=399,
+            n_states=True,
+        )
+
+
+def test_solver_rejects_non_integer_n_states():
+    with pytest.raises(TypeError):
+        solve_harmonic_oscillator(
+            q_min=-8.0,
+            q_max=8.0,
+            n_points=399,
+            n_states=3.5,
+        )
+
+
+def test_solver_rejects_zero_n_states():
+    with pytest.raises(ValueError):
+        solve_harmonic_oscillator(
+            q_min=-8.0,
+            q_max=8.0,
+            n_points=399,
+            n_states=0,
+        )
+
+
+def test_solver_rejects_too_many_states():
+    with pytest.raises(ValueError):
+        solve_harmonic_oscillator(
+            q_min=-8.0,
+            q_max=8.0,
+            n_points=9,
+            n_states=10,
+        )
+
+
+def test_solver_rejects_boolean_n_points():
+    with pytest.raises(TypeError):
+        solve_harmonic_oscillator(
+            q_min=-8.0,
+            q_max=8.0,
+            n_points=True,
+            n_states=1,
+        )
